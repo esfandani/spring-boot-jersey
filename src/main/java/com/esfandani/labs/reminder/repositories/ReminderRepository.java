@@ -12,5 +12,6 @@ import com.esfandani.labs.reminder.entities.Status;
 @Repository
 public interface ReminderRepository extends JpaRepository<Reminder, Long> {
     List<Reminder> findByDueDateBetweenAndStatus(LocalDateTime from, LocalDateTime to, Status status);
+
     List<Reminder> findByDueDateBetween(LocalDateTime from, LocalDateTime to);
 }

@@ -13,27 +13,25 @@ import com.esfandani.labs.reminder.entities.Reminder;
 import com.esfandani.labs.reminder.repositories.ReminderRepository;
 import com.esfandani.labs.reminder.services.ReminderService;
 
+/**
+ * A simple implementation of {@link ReminderService} using {@link org.springframework.data.jpa.repository.JpaRepository}
+ */
 @Service
 public class ReminderServiceImpl implements ReminderService {
-    @Autowired
     private ReminderRepository reminderRepository;
+    private ConversionService conversionService;
 
     @Autowired
-    private ConversionService conversionService;
+    public ReminderServiceImpl(ReminderRepository reminderRepository,ConversionService conversionService) {
+        this.reminderRepository = reminderRepository;
+        this.conversionService = conversionService;
+    }
 
     @Override
     public ReminderDTO save(Reminder reminder) {
         return Optional.ofNullable(reminderRepository.save(reminder))
                 .map(source -> conversionService.convert(source, ReminderDTO.class))
                 .orElse(null);
-    }
-
-    @Override
-    public List<ReminderDTO> findAll() {
-        return reminderRepository.findAll()
-                .stream()
-                .map(source -> conversionService.convert(source, ReminderDTO.class))
-                .collect(Collectors.toList());
     }
 
     @Override

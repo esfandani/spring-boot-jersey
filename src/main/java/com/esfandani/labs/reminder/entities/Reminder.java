@@ -7,11 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
+@Table(name="reminder",indexes = {
+        @Index(columnList = "id",name="id_idx"),
+        @Index(columnList = "status",name="status_idx"),
+        @Index(columnList = "due_date",name="due_date_idx"),
+
+})
 public class Reminder {
 
     private Long id;
@@ -30,7 +38,7 @@ public class Reminder {
         this.id = id;
     }
 
-    @Column(length = 255)
+    @Column(length = 255,nullable = false)
     @NotNull
     @NotBlank
     public String getName() {
@@ -41,7 +49,7 @@ public class Reminder {
         this.name = name;
     }
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT",nullable = false)
     @NotNull
     @NotBlank
     public String getDescription() {
@@ -52,6 +60,7 @@ public class Reminder {
         this.description = description;
     }
 
+    @Column(name = "due_date",nullable = false)
     public LocalDateTime getDueDate() {
         return dueDate;
     }
@@ -60,6 +69,7 @@ public class Reminder {
         this.dueDate = dueDate;
     }
 
+    @Column(nullable = false)
     public Status getStatus() {
         return status;
     }

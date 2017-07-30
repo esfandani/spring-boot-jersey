@@ -12,11 +12,15 @@ public class SearchCriteria {
     private LocalDateTime from;
     private LocalDateTime to;
     private Status status;
+    private Integer limit;
+    private Integer offset;
 
     private SearchCriteria(SearchCriteriaBuilder builder) {
         this.from = builder.from;
         this.to = builder.to;
         this.status = builder.status;
+        this.limit = builder.limit;
+        this.offset = builder.offset;
     }
 
     public LocalDateTime getFrom() {
@@ -43,10 +47,28 @@ public class SearchCriteria {
         this.status = status;
     }
 
+    public Optional<Integer> getLimit() {
+        return Optional.ofNullable(limit);
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Optional<Integer> getOffset() {
+        return Optional.ofNullable(offset);
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
     public static class SearchCriteriaBuilder {
         private LocalDateTime from;
         private LocalDateTime to;
         private Status status;
+        private Integer limit;
+        private Integer offset;
 
         public SearchCriteriaBuilder setFrom(LocalDateTime from) {
             this.from = from;
@@ -60,6 +82,14 @@ public class SearchCriteria {
 
         public SearchCriteriaBuilder setStatus(Status status) {
             this.status = status;
+            return this;
+        }
+        public SearchCriteriaBuilder setOffset(Integer offset){
+            this.offset = offset;
+            return this;
+        }
+        public SearchCriteriaBuilder setLimit(Integer limit){
+            this.limit = limit;
             return this;
         }
 

@@ -16,7 +16,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.esfandani.labs.reminder.dtos.ReminderDTO;
 import com.esfandani.labs.reminder.dtos.SearchCriteria;
@@ -24,7 +24,10 @@ import com.esfandani.labs.reminder.entities.Reminder;
 import com.esfandani.labs.reminder.entities.Status;
 import com.esfandani.labs.reminder.services.ReminderService;
 
-@Component
+/**
+ * a rest controller class that get requests related to {@link Reminder}.
+ */
+@RestController
 @Path("reminders")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -61,10 +64,9 @@ public class ReminderResrouce {
     }
 
     @GET
-    public List<ReminderDTO> findByStatusDueDate(@QueryParam("from") String from,
-                                                 @QueryParam("to") String to,
-                                                 @QueryParam("status") Status status) {
-
+    public List<ReminderDTO> findByParam(@QueryParam("from") String from,
+                                         @QueryParam("to") String to,
+                                         @QueryParam("status") Status status) {
         LocalDateTime fromDateTime = from != null ? LocalDateTime.parse(from) : null;
         LocalDateTime toDateTime = to != null ? LocalDateTime.parse(to) : null;
         SearchCriteria criteria = new SearchCriteria.SearchCriteriaBuilder().setFrom(fromDateTime)
