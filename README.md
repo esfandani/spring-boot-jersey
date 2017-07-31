@@ -3,7 +3,7 @@ Spring boot with Jersey: A Simple Reminder Service
 
 Summary
 -------------
-This is simple reminder app with crud/find operations. Database for this project is in-memory database h2. In order to use JAX-RS, Jersey configuration is added to the project.
+This is a simple reminder app with crud/find operations. Database used for this project is in-memory database h2. In order to use JAX-RS, Jersey configuration is added to the project.
 
 Setup
 -------------
@@ -12,7 +12,8 @@ In order to run the project, run the following commands:
 
 
 
- `git clone https://github.com/esfandani/spring-boot-jersey.git`
+ `git clone https://github.com/esfandani/spring-boot-jersey.git` 
+ 
 `mvn spring-boot:run`
 
  Now the project is listening on port 8004.
